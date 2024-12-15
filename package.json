@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "Phudit Chuengjaroen",
+  "license": "MIT",
+  "description": "Fast starter project with react, shadncn, tanstack router and vite",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
