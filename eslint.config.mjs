@@ -43,7 +43,7 @@ export default tseslint.config(
       'postcss.config.js',
       'prettier.config.mjs',
       'tailwind.config.js',
-      'lint-staged.config.mjs',
+      'lint-staged.config.js',
     ],
   },
   { languageOptions: { ...languageOptions } },

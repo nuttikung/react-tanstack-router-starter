@@ -14,4 +14,4 @@ const NavbarLogin = () => {
   );
 };
 
-export { NavbarLogin };
+export default NavbarLogin;
