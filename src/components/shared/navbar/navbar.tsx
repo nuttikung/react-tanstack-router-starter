@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router';
 import ThemeSwitcher from '../theme-switcher';
 import DesktopNavbar from './desktop-navbar';
 import MobileNavbar from './mobile-navbar';
+import { NavbarLogin } from './navbar-login';
 
 const Navbar = () => {
   return (
@@ -19,6 +20,7 @@ const Navbar = () => {
           <MobileNavbar />
 
           <div className="flex items-center space-x-2">
+            <NavbarLogin />
             <ThemeSwitcher />
           </div>
         </div>

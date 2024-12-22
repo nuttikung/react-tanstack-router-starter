@@ -1,4 +1,4 @@
-import { ComponentProps, HTMLAttributes } from 'react';
+import type { ComponentProps, HTMLAttributes } from 'react';
 
 import { Drawer as DrawerPrimitive } from 'vaul';
 

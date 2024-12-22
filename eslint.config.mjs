@@ -15,6 +15,10 @@ const languageOptions = {
   globals: globals.browser,
   sourceType: 'module',
   parser: tsParser,
+  parserOptions: {
+    projectService: true,
+    tsconfigRootDir: import.meta.dirname,
+  },
 };
 
 const pluginsOptions = {
@@ -28,13 +32,22 @@ const pluginsOptions = {
 };
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  { ignores: ['dist', 'eslint.config.mjs'] },
+export default tseslint.config(
+  pluginJs.configs.recommended,
+  tseslint.configs.recommendedTypeChecked,
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], extends: [tseslint.configs.disableTypeChecked] },
+  {
+    ignores: [
+      'dist',
+      'eslint.config.mjs',
+      'postcss.config.js',
+      'prettier.config.mjs',
+      'tailwind.config.js',
+      'lint-staged.config.mjs',
+    ],
+  },
   { languageOptions: { ...languageOptions } },
   { plugins: { ...pluginsOptions } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
   {
     rules: {
       // React
@@ -43,7 +56,9 @@ export default [
       'react-hooks/exhaustive-deps': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       // Typescript
-      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
       // Import Order
       'import/order': [
         'error',
@@ -72,5 +87,54 @@ export default [
         },
       ],
     },
-  },
-];
+  }
+);
+
+// [
+//   pluginJs.configs.recommended,
+//   ...tseslint.configs.recommendedTypeChecked,
+//   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+//   { ignores: ['dist', 'eslint.config.mjs'] },
+//   { languageOptions: { ...languageOptions } },
+//   { plugins: { ...pluginsOptions } },
+//   {
+//     rules: {
+//       // React
+//       ...reactHooksPlugin.configs.recommended.rules,
+//       'react-compiler/react-compiler': 'error',
+//       'react-hooks/exhaustive-deps': 'off',
+//       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+//       // Typescript
+//       // '@typescript-eslint/no-unused-vars': 'off',
+//       // '@typescript-eslint/consistent-type-exports': 'error',
+//       // '@typescript-eslint/consistent-type-imports': 'error',
+//       // Import Order
+//       'import/order': [
+//         'error',
+//         {
+//           groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+//           pathGroups: [
+//             {
+//               pattern: '{react,react-*,react-*/**}',
+//               group: 'builtin',
+//               position: 'before',
+//             },
+//           ],
+//           pathGroupsExcludedImportTypes: ['{react,react-*,react-*/**}'],
+//           'newlines-between': 'always',
+//         },
+//       ],
+//       // Unused Imports
+//       'unused-imports/no-unused-imports': 'error',
+//       'unused-imports/no-unused-vars': [
+//         'warn',
+//         {
+//           vars: 'all',
+//           varsIgnorePattern: '^_',
+//           args: 'after-used',
+//           argsIgnorePattern: '^_',
+//         },
+//       ],
+//     },
+//   },
+// ];
