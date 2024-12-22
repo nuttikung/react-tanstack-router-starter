@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoginLogin01Import } from './routes/_login/login-01'
 
 // Create Virtual Routes
 
@@ -49,6 +50,12 @@ const BlogIndexLazyRoute = BlogIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route))
 
+const LoginLogin01Route = LoginLogin01Import.update({
+  id: '/_login/login-01',
+  path: '/login-01',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,6 +65,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_login/login-01': {
+      id: '/_login/login-01'
+      path: '/login-01'
+      fullPath: '/login-01'
+      preLoaderRoute: typeof LoginLogin01Import
       parentRoute: typeof rootRoute
     }
     '/blog/': {
@@ -88,6 +102,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/login-01': typeof LoginLogin01Route
   '/blog': typeof BlogIndexLazyRoute
   '/components': typeof ComponentsIndexLazyRoute
   '/docs': typeof DocsIndexLazyRoute
@@ -95,6 +110,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/login-01': typeof LoginLogin01Route
   '/blog': typeof BlogIndexLazyRoute
   '/components': typeof ComponentsIndexLazyRoute
   '/docs': typeof DocsIndexLazyRoute
@@ -103,6 +119,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/_login/login-01': typeof LoginLogin01Route
   '/blog/': typeof BlogIndexLazyRoute
   '/components/': typeof ComponentsIndexLazyRoute
   '/docs/': typeof DocsIndexLazyRoute
@@ -110,15 +127,22 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog' | '/components' | '/docs'
+  fullPaths: '/' | '/login-01' | '/blog' | '/components' | '/docs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog' | '/components' | '/docs'
-  id: '__root__' | '/' | '/blog/' | '/components/' | '/docs/'
+  to: '/' | '/login-01' | '/blog' | '/components' | '/docs'
+  id:
+    | '__root__'
+    | '/'
+    | '/_login/login-01'
+    | '/blog/'
+    | '/components/'
+    | '/docs/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  LoginLogin01Route: typeof LoginLogin01Route
   BlogIndexLazyRoute: typeof BlogIndexLazyRoute
   ComponentsIndexLazyRoute: typeof ComponentsIndexLazyRoute
   DocsIndexLazyRoute: typeof DocsIndexLazyRoute
@@ -126,6 +150,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  LoginLogin01Route: LoginLogin01Route,
   BlogIndexLazyRoute: BlogIndexLazyRoute,
   ComponentsIndexLazyRoute: ComponentsIndexLazyRoute,
   DocsIndexLazyRoute: DocsIndexLazyRoute,
@@ -142,6 +167,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/_login/login-01",
         "/blog/",
         "/components/",
         "/docs/"
@@ -149,6 +175,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/_login/login-01": {
+      "filePath": "_login/login-01.tsx"
     },
     "/blog/": {
       "filePath": "blog/index.lazy.tsx"
