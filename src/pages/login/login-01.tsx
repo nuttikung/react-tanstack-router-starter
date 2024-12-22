@@ -61,8 +61,6 @@ function LoginForm() {
     },
   });
 
-  console.log(form.formState.errors);
-
   const onSubmit = (data: TLoginSchema) => {
     console.log(data);
   };
