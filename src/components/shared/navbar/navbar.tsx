@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router';
 import ThemeSwitcher from '../theme-switcher';
 import DesktopNavbar from './desktop-navbar';
 import MobileNavbar from './mobile-navbar';
-import { NavbarLogin } from './navbar-login';
+import NavbarLogin from './navbar-login';
 
 const Navbar = () => {
   return (
