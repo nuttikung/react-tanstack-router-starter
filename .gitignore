@@ -27,6 +27,8 @@ node_modules
 bower_components
 
 # Editors
+.vscode
+.zed
 .idea
 *.iml
 
