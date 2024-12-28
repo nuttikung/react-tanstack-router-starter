@@ -1,4 +1,5 @@
 import { Layout } from '@/components/shared/layout/layout';
+import { COMPONENTS } from '@/pages/components/constant';
 
 const meta = {
   title: 'Components',
@@ -11,13 +12,12 @@ const ComponentPage = () => {
       <Layout>
         <main>
           <div className="relative">
-            <div className="container mx-auto py-32">
-              <h1 className="text-center text-2xl font-bold opacity-100 transform-none">
-                Components
-              </h1>
-              <p className="mt-6 text-center opacity-100 transform-none">To be continue...</p>
-            </div>
-            <div className="w-full h-[336px] bg-slate-600 top-0 left-0 absolute -z-[1]" />
+            {COMPONENTS.map(({ component, name }) => (
+              <div className="container mx-auto py-4" key={name}>
+                {component}
+              </div>
+            ))}
+            <div className="w-full h-full bg-gray-50 dark:bg-gray-950 top-0 left-0 absolute -z-[1]" />
           </div>
         </main>
       </Layout>
