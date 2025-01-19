@@ -1,4 +1,4 @@
-import { Layout } from '@/components/shared/layout/layout';
+import { SingleLayout } from '@/components/shared/layout';
 
 const meta = {
   title: 'Blog',
@@ -8,7 +8,7 @@ const BlogPage = () => {
   return (
     <>
       <title>{meta.title}</title>
-      <Layout>
+      <SingleLayout>
         <main>
           <div className="relative">
             <div className="container mx-auto py-32">
@@ -18,7 +18,7 @@ const BlogPage = () => {
             <div className="w-full h-[336px] bg-slate-600 top-0 left-0 absolute -z-[1]" />
           </div>
         </main>
-      </Layout>
+      </SingleLayout>
     </>
   );
 };

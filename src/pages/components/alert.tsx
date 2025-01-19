@@ -3,9 +3,15 @@ import { AlertCircle } from 'lucide-react';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
+const meta = {
+  title: 'Component - Alert',
+};
+
 const AlertDemo = () => {
   return (
     <>
+      <title>{meta.title}</title>
+      <div className="text-xl">Alert</div>
       <Alert className="my-2">
         <Terminal className="h-4 w-4" />
         <AlertTitle>Default!</AlertTitle>

@@ -6,8 +6,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from '../../ui/navigation-menu';
-import { activeLinkClasses } from './constant';
+} from '@/components/ui/navigation-menu';
+import { activeLinkClasses } from '@/components/shared/navbar/constant';
 
 const DesktopNavbar = () => {
   return (
@@ -37,7 +37,7 @@ const DesktopNavbar = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-              <Link to="/components" className={activeLinkClasses} activeOptions={{ exact: true }}>
+              <Link to="/components" className={activeLinkClasses} activeOptions={{ exact: false }}>
                 Components
               </Link>
             </NavigationMenuLink>

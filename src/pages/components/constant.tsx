@@ -1,12 +1,11 @@
-import type { ReactNode } from 'react';
-
-import AlertDemo from '@/pages/components/alert';
+import type { LinkOptions } from '@tanstack/react-router';
 
 // ----------------------------------------------------------------------
 
 type TComponent = {
   name: string;
-  component: ReactNode;
+  // component: ReactNode;
+  to: LinkOptions['to'];
 };
 
 // ----------------------------------------------------------------------
@@ -14,7 +13,13 @@ type TComponent = {
 const COMPONENTS: Array<TComponent> = [
   {
     name: 'Alert',
-    component: <AlertDemo />,
+    // component: <AlertDemo />,
+    to: '/components/alert',
+  },
+  {
+    name: 'Accordion',
+    // component: <AccordionDemo />,
+    to: '/components/accordion',
   },
 ];
 

@@ -8,159 +8,240 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
+import { Route as rootRoute } from './routes/__root';
+import { Route as ComponentsImport } from './routes/_components';
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
-const DocsIndexLazyImport = createFileRoute('/docs/')()
-const ComponentsIndexLazyImport = createFileRoute('/components/')()
-const BlogIndexLazyImport = createFileRoute('/blog/')()
-const LoginLogin01LazyImport = createFileRoute('/_login/login-01')()
+const IndexLazyImport = createFileRoute('/')();
+const DocsIndexLazyImport = createFileRoute('/docs/')();
+const BlogIndexLazyImport = createFileRoute('/blog/')();
+const LoginLogin01LazyImport = createFileRoute('/_login/login-01')();
+const ComponentsComponentsIndexLazyImport = createFileRoute('/_components/components/')();
+const ComponentsComponentsAlertLazyImport = createFileRoute('/_components/components/alert')();
+const ComponentsComponentsAccordionLazyImport = createFileRoute(
+  '/_components/components/accordion'
+)();
 
 // Create/Update Routes
+
+const ComponentsRoute = ComponentsImport.update({
+  id: '/_components',
+  getParentRoute: () => rootRoute,
+} as any);
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
 
 const DocsIndexLazyRoute = DocsIndexLazyImport.update({
   id: '/docs/',
   path: '/docs/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/docs/index.lazy').then((d) => d.Route))
-
-const ComponentsIndexLazyRoute = ComponentsIndexLazyImport.update({
-  id: '/components/',
-  path: '/components/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/components/index.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import('./routes/docs/index.lazy').then((d) => d.Route));
 
 const BlogIndexLazyRoute = BlogIndexLazyImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route));
 
 const LoginLogin01LazyRoute = LoginLogin01LazyImport.update({
   id: '/_login/login-01',
   path: '/login-01',
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/_login/login-01.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import('./routes/_login/login-01.lazy').then((d) => d.Route));
+
+const ComponentsComponentsIndexLazyRoute = ComponentsComponentsIndexLazyImport.update({
+  id: '/components/',
+  path: '/components/',
+  getParentRoute: () => ComponentsRoute,
+} as any).lazy(() => import('./routes/_components/components/index.lazy').then((d) => d.Route));
+
+const ComponentsComponentsAlertLazyRoute = ComponentsComponentsAlertLazyImport.update({
+  id: '/components/alert',
+  path: '/components/alert',
+  getParentRoute: () => ComponentsRoute,
+} as any).lazy(() => import('./routes/_components/components/alert.lazy').then((d) => d.Route));
+
+const ComponentsComponentsAccordionLazyRoute = ComponentsComponentsAccordionLazyImport.update({
+  id: '/components/accordion',
+  path: '/components/accordion',
+  getParentRoute: () => ComponentsRoute,
+} as any).lazy(() => import('./routes/_components/components/accordion.lazy').then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/_components': {
+      id: '/_components';
+      path: '';
+      fullPath: '';
+      preLoaderRoute: typeof ComponentsImport;
+      parentRoute: typeof rootRoute;
+    };
     '/_login/login-01': {
-      id: '/_login/login-01'
-      path: '/login-01'
-      fullPath: '/login-01'
-      preLoaderRoute: typeof LoginLogin01LazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/_login/login-01';
+      path: '/login-01';
+      fullPath: '/login-01';
+      preLoaderRoute: typeof LoginLogin01LazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/components/': {
-      id: '/components/'
-      path: '/components'
-      fullPath: '/components'
-      preLoaderRoute: typeof ComponentsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/blog/';
+      path: '/blog';
+      fullPath: '/blog';
+      preLoaderRoute: typeof BlogIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/docs/': {
-      id: '/docs/'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof DocsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/docs/';
+      path: '/docs';
+      fullPath: '/docs';
+      preLoaderRoute: typeof DocsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/_components/components/accordion': {
+      id: '/_components/components/accordion';
+      path: '/components/accordion';
+      fullPath: '/components/accordion';
+      preLoaderRoute: typeof ComponentsComponentsAccordionLazyImport;
+      parentRoute: typeof ComponentsImport;
+    };
+    '/_components/components/alert': {
+      id: '/_components/components/alert';
+      path: '/components/alert';
+      fullPath: '/components/alert';
+      preLoaderRoute: typeof ComponentsComponentsAlertLazyImport;
+      parentRoute: typeof ComponentsImport;
+    };
+    '/_components/components/': {
+      id: '/_components/components/';
+      path: '/components';
+      fullPath: '/components';
+      preLoaderRoute: typeof ComponentsComponentsIndexLazyImport;
+      parentRoute: typeof ComponentsImport;
+    };
   }
 }
 
 // Create and export the route tree
 
+interface ComponentsRouteChildren {
+  ComponentsComponentsAccordionLazyRoute: typeof ComponentsComponentsAccordionLazyRoute;
+  ComponentsComponentsAlertLazyRoute: typeof ComponentsComponentsAlertLazyRoute;
+  ComponentsComponentsIndexLazyRoute: typeof ComponentsComponentsIndexLazyRoute;
+}
+
+const ComponentsRouteChildren: ComponentsRouteChildren = {
+  ComponentsComponentsAccordionLazyRoute: ComponentsComponentsAccordionLazyRoute,
+  ComponentsComponentsAlertLazyRoute: ComponentsComponentsAlertLazyRoute,
+  ComponentsComponentsIndexLazyRoute: ComponentsComponentsIndexLazyRoute,
+};
+
+const ComponentsRouteWithChildren = ComponentsRoute._addFileChildren(ComponentsRouteChildren);
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/login-01': typeof LoginLogin01LazyRoute
-  '/blog': typeof BlogIndexLazyRoute
-  '/components': typeof ComponentsIndexLazyRoute
-  '/docs': typeof DocsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '': typeof ComponentsRouteWithChildren;
+  '/login-01': typeof LoginLogin01LazyRoute;
+  '/blog': typeof BlogIndexLazyRoute;
+  '/docs': typeof DocsIndexLazyRoute;
+  '/components/accordion': typeof ComponentsComponentsAccordionLazyRoute;
+  '/components/alert': typeof ComponentsComponentsAlertLazyRoute;
+  '/components': typeof ComponentsComponentsIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/login-01': typeof LoginLogin01LazyRoute
-  '/blog': typeof BlogIndexLazyRoute
-  '/components': typeof ComponentsIndexLazyRoute
-  '/docs': typeof DocsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '': typeof ComponentsRouteWithChildren;
+  '/login-01': typeof LoginLogin01LazyRoute;
+  '/blog': typeof BlogIndexLazyRoute;
+  '/docs': typeof DocsIndexLazyRoute;
+  '/components/accordion': typeof ComponentsComponentsAccordionLazyRoute;
+  '/components/alert': typeof ComponentsComponentsAlertLazyRoute;
+  '/components': typeof ComponentsComponentsIndexLazyRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/_login/login-01': typeof LoginLogin01LazyRoute
-  '/blog/': typeof BlogIndexLazyRoute
-  '/components/': typeof ComponentsIndexLazyRoute
-  '/docs/': typeof DocsIndexLazyRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexLazyRoute;
+  '/_components': typeof ComponentsRouteWithChildren;
+  '/_login/login-01': typeof LoginLogin01LazyRoute;
+  '/blog/': typeof BlogIndexLazyRoute;
+  '/docs/': typeof DocsIndexLazyRoute;
+  '/_components/components/accordion': typeof ComponentsComponentsAccordionLazyRoute;
+  '/_components/components/alert': typeof ComponentsComponentsAlertLazyRoute;
+  '/_components/components/': typeof ComponentsComponentsIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login-01' | '/blog' | '/components' | '/docs'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login-01' | '/blog' | '/components' | '/docs'
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths:
+    | '/'
+    | ''
+    | '/login-01'
+    | '/blog'
+    | '/docs'
+    | '/components/accordion'
+    | '/components/alert'
+    | '/components';
+  fileRoutesByTo: FileRoutesByTo;
+  to:
+    | '/'
+    | ''
+    | '/login-01'
+    | '/blog'
+    | '/docs'
+    | '/components/accordion'
+    | '/components/alert'
+    | '/components';
   id:
     | '__root__'
     | '/'
+    | '/_components'
     | '/_login/login-01'
     | '/blog/'
-    | '/components/'
     | '/docs/'
-  fileRoutesById: FileRoutesById
+    | '/_components/components/accordion'
+    | '/_components/components/alert'
+    | '/_components/components/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  LoginLogin01LazyRoute: typeof LoginLogin01LazyRoute
-  BlogIndexLazyRoute: typeof BlogIndexLazyRoute
-  ComponentsIndexLazyRoute: typeof ComponentsIndexLazyRoute
-  DocsIndexLazyRoute: typeof DocsIndexLazyRoute
+  IndexLazyRoute: typeof IndexLazyRoute;
+  ComponentsRoute: typeof ComponentsRouteWithChildren;
+  LoginLogin01LazyRoute: typeof LoginLogin01LazyRoute;
+  BlogIndexLazyRoute: typeof BlogIndexLazyRoute;
+  DocsIndexLazyRoute: typeof DocsIndexLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  ComponentsRoute: ComponentsRouteWithChildren,
   LoginLogin01LazyRoute: LoginLogin01LazyRoute,
   BlogIndexLazyRoute: BlogIndexLazyRoute,
-  ComponentsIndexLazyRoute: ComponentsIndexLazyRoute,
   DocsIndexLazyRoute: DocsIndexLazyRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -169,14 +250,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/_components",
         "/_login/login-01",
         "/blog/",
-        "/components/",
         "/docs/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/_components": {
+      "filePath": "_components.tsx",
+      "children": [
+        "/_components/components/accordion",
+        "/_components/components/alert",
+        "/_components/components/"
+      ]
     },
     "/_login/login-01": {
       "filePath": "_login/login-01.lazy.tsx"
@@ -184,11 +273,20 @@ export const routeTree = rootRoute
     "/blog/": {
       "filePath": "blog/index.lazy.tsx"
     },
-    "/components/": {
-      "filePath": "components/index.lazy.tsx"
-    },
     "/docs/": {
       "filePath": "docs/index.lazy.tsx"
+    },
+    "/_components/components/accordion": {
+      "filePath": "_components/components/accordion.lazy.tsx",
+      "parent": "/_components"
+    },
+    "/_components/components/alert": {
+      "filePath": "_components/components/alert.lazy.tsx",
+      "parent": "/_components"
+    },
+    "/_components/components/": {
+      "filePath": "_components/components/index.lazy.tsx",
+      "parent": "/_components"
     }
   }
 }
