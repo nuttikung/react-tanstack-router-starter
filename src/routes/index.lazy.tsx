@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 
-import { Layout } from '@/components/shared/layout/layout';
+import { SingleLayout } from '@/components/shared/layout';
 
 export const Route = createLazyFileRoute('/')({
   component: RouteComponent,
@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute('/')({
 
 function RouteComponent() {
   return (
-    <Layout>
+    <SingleLayout>
       <div className="container mx-auto max-w-screen-2xl items-center">
         <div>Fake long content</div>
       </div>
@@ -16,6 +16,6 @@ function RouteComponent() {
       <div className="h-screen bg-slate-600" />
       <div className="h-screen bg-slate-600" />
       <div className="h-screen bg-slate-600" />
-    </Layout>
+    </SingleLayout>
   );
 }

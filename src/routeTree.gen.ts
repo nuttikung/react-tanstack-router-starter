@@ -8,19 +8,21 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
+import { Route as rootRoute } from './routes/__root';
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
-const DocsIndexLazyImport = createFileRoute('/docs/')()
-const ComponentsIndexLazyImport = createFileRoute('/components/')()
-const BlogIndexLazyImport = createFileRoute('/blog/')()
-const LoginLogin01LazyImport = createFileRoute('/_login/login-01')()
+const IndexLazyImport = createFileRoute('/')();
+const DocsIndexLazyImport = createFileRoute('/docs/')();
+const ComponentsIndexLazyImport = createFileRoute('/components/')();
+const BlogIndexLazyImport = createFileRoute('/blog/')();
+const ComponentsAlertLazyImport = createFileRoute('/components/alert')();
+const ComponentsAccordionLazyImport = createFileRoute('/components/accordion')();
+const LoginLogin01LazyImport = createFileRoute('/_login/login-01')();
 
 // Create/Update Routes
 
@@ -28,139 +30,187 @@ const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
 
 const DocsIndexLazyRoute = DocsIndexLazyImport.update({
   id: '/docs/',
   path: '/docs/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/docs/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/docs/index.lazy').then((d) => d.Route));
 
 const ComponentsIndexLazyRoute = ComponentsIndexLazyImport.update({
   id: '/components/',
   path: '/components/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/components/index.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import('./routes/components/index.lazy').then((d) => d.Route));
 
 const BlogIndexLazyRoute = BlogIndexLazyImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route));
+
+const ComponentsAlertLazyRoute = ComponentsAlertLazyImport.update({
+  id: '/components/alert',
+  path: '/components/alert',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/components/alert.lazy').then((d) => d.Route));
+
+const ComponentsAccordionLazyRoute = ComponentsAccordionLazyImport.update({
+  id: '/components/accordion',
+  path: '/components/accordion',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/components/accordion.lazy').then((d) => d.Route));
 
 const LoginLogin01LazyRoute = LoginLogin01LazyImport.update({
   id: '/_login/login-01',
   path: '/login-01',
   getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/_login/login-01.lazy').then((d) => d.Route),
-)
+} as any).lazy(() => import('./routes/_login/login-01.lazy').then((d) => d.Route));
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/_login/login-01': {
-      id: '/_login/login-01'
-      path: '/login-01'
-      fullPath: '/login-01'
-      preLoaderRoute: typeof LoginLogin01LazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/_login/login-01';
+      path: '/login-01';
+      fullPath: '/login-01';
+      preLoaderRoute: typeof LoginLogin01LazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/components/accordion': {
+      id: '/components/accordion';
+      path: '/components/accordion';
+      fullPath: '/components/accordion';
+      preLoaderRoute: typeof ComponentsAccordionLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/components/alert': {
+      id: '/components/alert';
+      path: '/components/alert';
+      fullPath: '/components/alert';
+      preLoaderRoute: typeof ComponentsAlertLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/blog/';
+      path: '/blog';
+      fullPath: '/blog';
+      preLoaderRoute: typeof BlogIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/components/': {
-      id: '/components/'
-      path: '/components'
-      fullPath: '/components'
-      preLoaderRoute: typeof ComponentsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/components/';
+      path: '/components';
+      fullPath: '/components';
+      preLoaderRoute: typeof ComponentsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/docs/': {
-      id: '/docs/'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof DocsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/docs/';
+      path: '/docs';
+      fullPath: '/docs';
+      preLoaderRoute: typeof DocsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/login-01': typeof LoginLogin01LazyRoute
-  '/blog': typeof BlogIndexLazyRoute
-  '/components': typeof ComponentsIndexLazyRoute
-  '/docs': typeof DocsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '/login-01': typeof LoginLogin01LazyRoute;
+  '/components/accordion': typeof ComponentsAccordionLazyRoute;
+  '/components/alert': typeof ComponentsAlertLazyRoute;
+  '/blog': typeof BlogIndexLazyRoute;
+  '/components': typeof ComponentsIndexLazyRoute;
+  '/docs': typeof DocsIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/login-01': typeof LoginLogin01LazyRoute
-  '/blog': typeof BlogIndexLazyRoute
-  '/components': typeof ComponentsIndexLazyRoute
-  '/docs': typeof DocsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '/login-01': typeof LoginLogin01LazyRoute;
+  '/components/accordion': typeof ComponentsAccordionLazyRoute;
+  '/components/alert': typeof ComponentsAlertLazyRoute;
+  '/blog': typeof BlogIndexLazyRoute;
+  '/components': typeof ComponentsIndexLazyRoute;
+  '/docs': typeof DocsIndexLazyRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/_login/login-01': typeof LoginLogin01LazyRoute
-  '/blog/': typeof BlogIndexLazyRoute
-  '/components/': typeof ComponentsIndexLazyRoute
-  '/docs/': typeof DocsIndexLazyRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexLazyRoute;
+  '/_login/login-01': typeof LoginLogin01LazyRoute;
+  '/components/accordion': typeof ComponentsAccordionLazyRoute;
+  '/components/alert': typeof ComponentsAlertLazyRoute;
+  '/blog/': typeof BlogIndexLazyRoute;
+  '/components/': typeof ComponentsIndexLazyRoute;
+  '/docs/': typeof DocsIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login-01' | '/blog' | '/components' | '/docs'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login-01' | '/blog' | '/components' | '/docs'
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths:
+    | '/'
+    | '/login-01'
+    | '/components/accordion'
+    | '/components/alert'
+    | '/blog'
+    | '/components'
+    | '/docs';
+  fileRoutesByTo: FileRoutesByTo;
+  to:
+    | '/'
+    | '/login-01'
+    | '/components/accordion'
+    | '/components/alert'
+    | '/blog'
+    | '/components'
+    | '/docs';
   id:
     | '__root__'
     | '/'
     | '/_login/login-01'
+    | '/components/accordion'
+    | '/components/alert'
     | '/blog/'
     | '/components/'
-    | '/docs/'
-  fileRoutesById: FileRoutesById
+    | '/docs/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  LoginLogin01LazyRoute: typeof LoginLogin01LazyRoute
-  BlogIndexLazyRoute: typeof BlogIndexLazyRoute
-  ComponentsIndexLazyRoute: typeof ComponentsIndexLazyRoute
-  DocsIndexLazyRoute: typeof DocsIndexLazyRoute
+  IndexLazyRoute: typeof IndexLazyRoute;
+  LoginLogin01LazyRoute: typeof LoginLogin01LazyRoute;
+  ComponentsAccordionLazyRoute: typeof ComponentsAccordionLazyRoute;
+  ComponentsAlertLazyRoute: typeof ComponentsAlertLazyRoute;
+  BlogIndexLazyRoute: typeof BlogIndexLazyRoute;
+  ComponentsIndexLazyRoute: typeof ComponentsIndexLazyRoute;
+  DocsIndexLazyRoute: typeof DocsIndexLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   LoginLogin01LazyRoute: LoginLogin01LazyRoute,
+  ComponentsAccordionLazyRoute: ComponentsAccordionLazyRoute,
+  ComponentsAlertLazyRoute: ComponentsAlertLazyRoute,
   BlogIndexLazyRoute: BlogIndexLazyRoute,
   ComponentsIndexLazyRoute: ComponentsIndexLazyRoute,
   DocsIndexLazyRoute: DocsIndexLazyRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -170,6 +220,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_login/login-01",
+        "/components/accordion",
+        "/components/alert",
         "/blog/",
         "/components/",
         "/docs/"
@@ -180,6 +232,12 @@ export const routeTree = rootRoute
     },
     "/_login/login-01": {
       "filePath": "_login/login-01.lazy.tsx"
+    },
+    "/components/accordion": {
+      "filePath": "components/accordion.lazy.tsx"
+    },
+    "/components/alert": {
+      "filePath": "components/alert.lazy.tsx"
     },
     "/blog/": {
       "filePath": "blog/index.lazy.tsx"
