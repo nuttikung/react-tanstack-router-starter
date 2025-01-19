@@ -2,8 +2,7 @@ import { Menu } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-import { activeLinkClasses } from './constant';
-
+import { activeLinkClasses } from '@/components/shared/navbar/constant';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle } from '@/components/ui/drawer';
 import {

@@ -12,7 +12,7 @@ const ComponentMenus = () => {
           <Menu.Item key={name}>
             <Link
               to={to}
-              className="text-gray-400 [&.active]:text-black"
+              className="text-gray-400 [&.active]:text-black dark:[&.active]:text-white dark:text-gray-400 dark:text-opacity-50"
               activeOptions={{ exact: true }}
             >
               {name}
