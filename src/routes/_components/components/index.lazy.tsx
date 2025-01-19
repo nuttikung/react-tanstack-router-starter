@@ -2,6 +2,6 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 
 import ComponentPage from '@/pages/components';
 
-export const Route = createLazyFileRoute('/components/')({
+export const Route = createLazyFileRoute('/_components/components/')({
   component: ComponentPage,
 });

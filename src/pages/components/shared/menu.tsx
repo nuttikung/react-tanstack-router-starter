@@ -10,7 +10,13 @@ const ComponentMenus = () => {
       <Menu.ItemGroup>
         {COMPONENTS.map(({ name, to }) => (
           <Menu.Item key={name}>
-            <Link to={to}>{name}</Link>
+            <Link
+              to={to}
+              className="text-gray-400 [&.active]:text-black"
+              activeOptions={{ exact: true }}
+            >
+              {name}
+            </Link>
           </Menu.Item>
         ))}
       </Menu.ItemGroup>
