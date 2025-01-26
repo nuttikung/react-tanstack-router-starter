@@ -1,10 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
-import "./index.css";
-import App from "./App.tsx";
+import './index.css';
+import App, { router } from './App.tsx';
 
-const rootElement = document.getElementById("root")!;
+const rootElement = document.getElementById('root')!;
 
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement, {
@@ -19,6 +19,8 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <App />
-    </StrictMode>,
+    </StrictMode>
   );
+
+  router.navigate({ to: window.location.href.split('?')[1]?.split('=')[1] });
 }
