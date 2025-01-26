@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import './index.css';
-import App, { router } from './App.tsx';
+import App from './App.tsx';
 
 const rootElement = document.getElementById('root')!;
 
@@ -21,6 +21,4 @@ if (!rootElement.innerHTML) {
       <App />
     </StrictMode>
   );
-
-  router.navigate({ to: window.location.href.split('?')[1]?.split('=')[1] });
 }
