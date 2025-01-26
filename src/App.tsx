@@ -27,6 +27,4 @@ function App() {
   );
 }
 
-export { router };
-
 export default App;
