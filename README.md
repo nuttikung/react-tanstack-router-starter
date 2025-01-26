@@ -1,23 +1,34 @@
-# React + Vite + Typescript + Tanstack Router Starter Project
+**Table of Contents**
 
-This project is temporary made.
+## Features
+
+| Page          | Route         |
+| ------------- | ------------- |
+| Login (1)     | `/login-01`   |
+| Component     | `/components` |
+
+| Component     | Route                   |
+| ------------- | ----------------------- |
+| Alert         | `/components/alert`     |
+| Accordion     | `/components/accordion` |
 
 # Dependencies
 
-- React version 19
-- Tailwind CSS
+- Support React version 19 and React Compiler
+  - This is mean you don't need to worry about useMemo and useCallback
 - Shadcn UI
-- Lucide
-- Tanstack Router
-
-# Development Tool
-
-- Tanstack Router Devtools
+  - Icon by Lucide
+  - Tailwind CSS
+- Routing by Tanstack Router
+- TypeScript
+- OXC Linter
 - Eslint
-- Vite
-- Prettier
-- React Compiler
+- Bundle by Vite
+- Formatting via Prettier
 
 # Roadmap
+
+[ ] Add component
+[ ] Implement Authenticate Context as Demo
 
 To be continue
